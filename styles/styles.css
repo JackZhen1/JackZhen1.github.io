@@ -25,6 +25,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    top: 50%; /* 菜单的顶部移到页面高度的 50% */
-    transform: translateY(-50%); /* 菜单向上移动一半的高度，确保垂直居中 */
+    top: 50%;
+    transform: translateY(-50%);
 }

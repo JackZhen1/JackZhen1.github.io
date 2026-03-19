@@ -1,9 +1,12 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import useTypeWriter from "./hooks/useTypeWriter";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [showAboutMe, setShowAboutMe] = useState(false);
 
+  const titles = ["Full Stack Developer.", "Web Administrator", "abc"];
+  const text = useTypeWriter(titles, 100, 50, 1000);
   const inputRef = useRef(null);
 
   const handleKeyDown = (e) => {
@@ -19,10 +22,10 @@ const App = () => {
     // body
     <div className='flex flex-col items-center justify-center min-h-dvh'>
       
-      <h1 className="font-geologica text-9xl">Hi,</h1>
-      <h2 className="font-geologica text-5xl">I'm Jack Zhen</h2>
-        
-      
+      <h1 className="text-9xl">Hi,</h1>
+      <h2 className="text-5xl">I'm Jack Zhen</h2>
+      <h2>I'm a {text}_</h2>
+
       {/* cmd container */}
       <div className='border-white border w-4/6 '>
 

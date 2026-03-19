@@ -19,7 +19,9 @@ const useTypeWriter = (list, writingSpeed, deletingSpeed, delay) => {
             }
         }
         
-        const speed = isDeleting ? deletingSpeed : writingSpeed
+        const speed = (text === list[currentIndex] && !isDeleting) 
+        ? delay 
+        : (isDeleting ? deletingSpeed : writingSpeed);
         
         const timer = setTimeout(updateText, speed);
         

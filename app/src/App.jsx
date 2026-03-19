@@ -3,11 +3,12 @@ import useTypeWriter from "./hooks/useTypeWriter";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef(null);
   const [showAboutMe, setShowAboutMe] = useState(false);
 
-  const titles = ["Full Stack Developer.", "Web Administrator", "abc"];
-  const text = useTypeWriter(titles, 100, 50, 1000);
-  const inputRef = useRef(null);
+  const titles = ["Full Stack Developer.", "Web Administrator.", "abcdwadwa."];
+  const text = useTypeWriter(titles, 100, 50, 2000);
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -22,9 +23,9 @@ const App = () => {
     // body
     <div className='flex flex-col items-center justify-center min-h-dvh'>
       
-      <h1 className="text-9xl">Hi,</h1>
+      <h1 className="text-8xl">Hi,</h1>
       <h2 className="text-5xl">I'm Jack Zhen</h2>
-      <h2>I'm a {text}_</h2>
+      <h2 className="text-3xl">I'm a <span className="text-cyan-300">{text}</span>|</h2>
 
       {/* cmd container */}
       <div className='border-white border w-4/6 '>

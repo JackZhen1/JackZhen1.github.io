@@ -15,15 +15,18 @@ const Projects = () => {
     const ringRef = useRef(null);
     const rotation = useRef(0);
     const animationFrame = useRef(null);
+    const velocity = useRef(0);
 
     const updateAnimation = () => {
-        const constSpeed = 0.4
-        rotation.current += constSpeed
+        const constSpeed = 0.001
+        velocity.current += constSpeed
+        rotation.current += velocity.current
 
         if (ringRef.current) {
             ringRef.current.style.transform = `rotateY(${rotation.current}deg)`;
         }
 
+        velocity.current *= 0.95
         animationFrame.current = requestAnimationFrame(updateAnimation);
     }
 
@@ -32,15 +35,17 @@ const Projects = () => {
 
     return () => cancelAnimationFrame(animationFrame.current);
     }, []);
-    const handleWheel = (e) => {
 
+    const handleWheel = (e) => {
+        velocity.current += e.deltaY * 0.028
     }
+
     return (
         <div className="w-full h-125 flex items-center justify-center perspective-[7000px]" onWheel={handleWheel}>
             <div className="relative w-50 h-75" style={{ transformStyle: 'preserve-3d' }} ref={ringRef}>
 
                 {images.map((img, index) => {
-                    const angle = 180/imgLength * index - 90
+                    const angle = 360/imgLength * index - 90
                     return (
                         <div key={index} className="absolute top-0 left-0 w-full h-full" 
                         style={{transform: `rotateY(${angle}deg) translateZ(${1200/Math.PI}px)`}}>
@@ -51,8 +56,7 @@ const Projects = () => {
 
             </div>
         </div>
-    )
-    
+    ) 
 };
 
 export default Projects;

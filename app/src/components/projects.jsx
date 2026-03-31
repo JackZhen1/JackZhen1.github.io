@@ -16,17 +16,25 @@ const Projects = () => {
     const rotation = useRef(0);
     const animationFrame = useRef(null);
     const velocity = useRef(0);
+    const isHovered = useRef(false);
 
     const updateAnimation = () => {
         const constSpeed = 0.001
-        velocity.current += constSpeed
+
+        if (!isHovered.current) {
+            velocity.current += constSpeed
+        }
+        
         rotation.current += velocity.current
 
+        
         if (ringRef.current) {
             ringRef.current.style.transform = `rotateY(${rotation.current}deg)`;
         }
 
-        velocity.current *= 0.95
+        // inertia
+        velocity.current *= 0.97
+
         animationFrame.current = requestAnimationFrame(updateAnimation);
     }
 
@@ -41,7 +49,10 @@ const Projects = () => {
     }
 
     return (
-        <div className="w-full h-125 flex items-center justify-center perspective-[7000px]" onWheel={handleWheel}>
+        <div className="flex items-center justify-center perspective-[7000px]" 
+        onWheel={handleWheel}
+        onMouseEnter={() => isHovered.current = true}
+        onMouseLeave={() => isHovered.current = false}>
             <div className="relative w-50 h-75" style={{ transformStyle: 'preserve-3d' }} ref={ringRef}>
 
                 {images.map((img, index) => {
@@ -49,7 +60,10 @@ const Projects = () => {
                     return (
                         <div key={index} className="absolute top-0 left-0 w-full h-full" 
                         style={{transform: `rotateY(${angle}deg) translateZ(${1200/Math.PI}px)`}}>
-                            <img src={img} className="w-full h-full object-cover" />
+                            <a href="https://www.youtube.com/?hl=zh-cn">
+                                <img src={img} className="w-full h-full object-cover" />
+                            </a>
+                            
                         </div>
                     )
                 })}

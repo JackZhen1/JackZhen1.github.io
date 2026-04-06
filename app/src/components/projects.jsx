@@ -54,6 +54,8 @@ const Projects = () => {
 
     const handleWheel = (e) => {
         velocity.current += e.deltaY * 0.028
+        setFocusedIndex(null)
+        focusedIndexRef.current = null
     }
 
     return (

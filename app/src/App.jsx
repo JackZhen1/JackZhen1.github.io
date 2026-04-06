@@ -12,7 +12,6 @@ const App = () => {
   const titles = ["Full Stack Developer.", "Web Administrator.", "abcdwadwa."];
   const text = useTypeWriter(titles, 100, 50, 2000);
 
-
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       if (inputValue === 'about-me') {
@@ -76,7 +75,6 @@ const App = () => {
               )}
 
               {showProjects && <Projects />}
-
             </div>
             
           </div>

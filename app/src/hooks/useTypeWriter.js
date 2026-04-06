@@ -10,10 +10,13 @@ const useTypeWriter = (list, writingSpeed, deletingSpeed, delay) => {
             const currentFullText = list[currentIndex];
             isDeleting ? setText(currentFullText.substring(0, text.length - 1))
                 : setText(currentFullText.substring(0, text.length + 1))
-            if (text === currentFullText) {
+            if (!isDeleting && text === currentFullText) {
+                if (delay === 0) {
+                    return; 
+                }
                 setIsDeleting(true);
             }
-            if (text === '') {
+            else if (isDeleting && text === '') {
                 setIsDeleting(false);
                 setCurrentIndex((currentIndex + 1) % list.length);
             }
@@ -23,9 +26,13 @@ const useTypeWriter = (list, writingSpeed, deletingSpeed, delay) => {
         ? delay 
         : (isDeleting ? deletingSpeed : writingSpeed);
         
-        const timer = setTimeout(updateText, speed);
+        if (speed > 0) {
+            const timer = setTimeout(updateText, speed);
+            return () => clearTimeout(timer);
+        }
         
-        return () => clearTimeout(timer);
+        
+        
     },[text, isDeleting])
     
     return text;

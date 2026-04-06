@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import useTypeWriter from "../hooks/useTypeWriter"
 
 const images = [
     'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500',
@@ -21,6 +22,7 @@ const Projects = () => {
     const [focusedIndex, setFocusedIndex] = useState(null);
     const focusedIndexRef = useRef(null);
 
+    const titleText = useTypeWriter(['My Projects'], 100, 0, 0);
     const updateAnimation = () => {
         const constSpeed = 0.001
 
@@ -59,13 +61,17 @@ const Projects = () => {
     }
 
     return (
-        <div className="flex items-center justify-center perspective-[7000px]" 
-        onWheel={handleWheel}
-        onMouseEnter={() => isHovered.current = true}
-        onMouseLeave={() => {
-            isHovered.current = false
-            setFocusedIndex(null)
-            focusedIndexRef.current = null}}>
+        <div className="w-full flex flex-col">
+            <p className="text-4xl text-center my-6">{titleText}</p>
+
+            <div className="flex items-center justify-center perspective-[7000px]" 
+            onWheel={handleWheel}
+            onMouseEnter={() => isHovered.current = true}
+                onMouseLeave={() => {
+                isHovered.current = false
+                setFocusedIndex(null)
+                focusedIndexRef.current = null}}>
+
             <div className="relative w-50 h-75" style={{ transformStyle: 'preserve-3d' }} ref={ringRef}>
 
                 {images.map((img, index) => {
@@ -88,6 +94,8 @@ const Projects = () => {
 
             </div>
         </div>
+        </div>
+       
     ) 
 };
 

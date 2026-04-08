@@ -47,7 +47,7 @@ const App = () => {
             </div>
 
             {/* window */}
-            <div className='p-2 font-bitcount text-xl h-150'>
+            <div className='p-2 font-bitcount text-xl h-fit'>
               <span className='text-2xl'>Commands: </span>
               
               <ul className="text-xl ml-2">

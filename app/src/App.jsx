@@ -18,24 +18,28 @@ const App = () => {
        setShowAboutMe(true);
       } else if (inputValue === 'projects'){
         setShowProjects(true);
+      } else{
+        setShowAboutMe(false);
+        setShowProjects(false);
       }
       setInputValue('');
     }
   }
   return (
     <div className="">
-      <Social />
-      <div className='flex flex-col'>
-        
-        {/* body */}
-        <div className="flex flex-col items-center">
-          {/* hero text */}
-          <h1 className="text-8xl">Hi,</h1>
-          <h2 className="text-5xl">I'm Jack Zhen</h2>
-          <h2 className="text-3xl">I'm a <span className="text-cyan-300">{text}</span>|</h2>
 
+        {/* body */}
+        <div className="flex flex-col items-center h-screen w-full snap-mandatory snap-y overflow-y-scroll scroll-smooth">
+          <Social/>
+          {/* hero text */}
+          <div className="snap-start h-[35vh] pt-10 flex flex-col items-center shrink-0">
+            <h1 className="text-8xl">Hi,</h1>
+            <h2 className="text-5xl">I'm Jack Zhen</h2>
+            <h2 className="text-3xl">I'm a <span className="text-cyan-300">{text}</span>|</h2>
+          </div>
+          
           {/* cmd container */}
-          <div className='border-white border w-4/6 '>
+          <div className='border-white border w-4/6 snap-start  min-h-screen shrink-0'>
 
             {/* header */}
             <div className='bg-gray-800 h-12 flex flex-col justify-end'>
@@ -47,7 +51,7 @@ const App = () => {
             </div>
 
             {/* window */}
-            <div className='p-2 font-bitcount text-xl h-fit'>
+            <div className='p-2 font-bitcount text-xl flex-1 flex flex-col'>
               <span className='text-2xl'>Commands: </span>
               
               <ul className="text-xl ml-2">
@@ -82,10 +86,7 @@ const App = () => {
         
 
         
-      </div>
-
-    </div>
-    
+      </div>  
     
   )
 }

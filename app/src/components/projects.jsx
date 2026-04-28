@@ -44,6 +44,8 @@ const Projects = () => {
     const focusedIndexRef = useRef(null);
 
     const titleText = useTypeWriter(['My Projects'], 200, 0, 0);
+
+    const hitBoxRef = useRef(null);
     const updateAnimation = () => {
         const constSpeed = 0.001
 
@@ -75,18 +77,31 @@ const Projects = () => {
     return () => cancelAnimationFrame(animationFrame.current);
     }, []);
 
-    const handleWheel = (e) => {
-        velocity.current += e.deltaY * 0.028
-        setFocusedIndex(null)
-        focusedIndexRef.current = null
-    }
+    useEffect(()=>{
+        const hitBox = hitBoxRef.current
+        if (!hitBox) return;
+
+        const handleProjectWheel = (e) => {
+            e.preventDefault();
+
+            velocity.current += e.deltaY * 0.028
+            setFocusedIndex(null)
+            focusedIndexRef.current = null
+        }
+
+        hitBox.addEventListener('wheel', handleProjectWheel, {passive: false});
+
+        return () => {
+            hitBox.removeEventListener('wheel', handleProjectWheel);
+        };
+    },[]);
 
     return (
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full h-screen flex flex-col items-center">
             <p className="text-4xl text-center my-8">{titleText}</p>
 
-            <div className="flex items-center justify-center perspective-[7000px]" 
-            onWheel={handleWheel}
+            <div className="flex items-center justify-center perspective-[7000px] border border-dashed border-gray-500 w-full" 
+            ref={hitBoxRef}
             onMouseEnter={() => isHovered.current = true}
                 onMouseLeave={() => {
                 isHovered.current = false

@@ -7,7 +7,7 @@ const projects = [
         'imageUrl': '/cs399.jpg',
         'projectUrl': 'https://github.com/JackZhen1/UoA-Online-Cross-Platform-Web-Mobile-Application-',
         'description': `UoA Your Way A .....app Tech Stack: Front End: React, React Native, TypeScript.`
-    },
+    },  
     {
         'name': 'Game Libary',
         'imageUrl': '/game_library.png',

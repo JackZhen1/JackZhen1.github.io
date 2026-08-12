@@ -11,27 +11,33 @@ const projects = [
     {
         'name': 'Game Libary',
         'imageUrl': '/game_library.png',
+        'description': `UoA Your Way A .....app Tech Stack: Front End: React, React Native, TypeScript.`
     },
     {
         'name': 'UoA Your Way',
         'imageUrl': 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500',
+        'description': `UoA Your Way A .....app Tech Stack: Front End: React, React Native, TypeScript.`
     },
     {
         'name': 'UoA Your Way',
         'imageUrl': 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500',
+        'description': `UoA Your Way A .....app Tech Stack: Front End: React, React Native, TypeScript.`
     },
     {
         'name': 'UoA Your Way',
         'imageUrl': 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500',
+        'description': `UoA Your Way A .....app Tech Stack: Front End: React, React Native, TypeScript.`
     },
     {
         'name': 'UoA Your Way',
         'imageUrl': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=500',
+        'description': `UoA Your Way A .....app Tech Stack: Front End: React, React Native, TypeScript.`
     },
 ]
 
 
 const Projects = () => {
+    const [projectDescription, setProjectDescription] = useState('');
     const imgLength = projects.length
 
     const ringRef = useRef(null);
@@ -96,6 +102,11 @@ const Projects = () => {
         };
     },[]);
 
+    useEffect(()=> {
+        const text = useTypeWriter([projects[focusedIndex].description], 200, 0, 0);
+        setProjectDescription(text)
+    },[focusedIndex])
+    
     return (
         <div className="w-full h-screen flex flex-col items-center">
             <p className="text-4xl text-center my-8">{titleText}</p>
@@ -134,7 +145,7 @@ const Projects = () => {
             </div>
             {focusedIndex !== null && (
                 <div className="mt-20">
-                    <p>{projects[focusedIndex].description}</p>
+                    <p>{projectDescription}</p>
                 </div>             
             )}
         </div>
